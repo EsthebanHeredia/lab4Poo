@@ -92,5 +92,87 @@ public class RadioB implements InterfazRadioB {
         }
     }
 
+        @Override
+    public void cargarEmisora(int posicion) {
+        if (encendido && posicion >= 0 && posicion < emisorasGuardadas.size()) {
+            emisoraActual = emisorasGuardadas.get(posicion);
+            System.out.println("Cargando emisora: " + emisoraActual);
+        } else {
+            System.out.println("Índice de emisora inválido.");
+        }
+    }
+
+    @Override
+    public void seleccionarListaReproduccion(String nombreLista) {
+        if (encendido && listasReproduccion.containsKey(nombreLista)) {
+            listaActual = listasReproduccion.get(nombreLista);
+            indiceCancion = 0;
+            System.out.println("Lista seleccionada: " + nombreLista);
+        } else {
+            System.out.println("Lista no disponible.");
+        }
+    }
+
+    @Override
+    public void cambiarCancion(boolean siguiente) {
+        if (encendido && !listaActual.isEmpty()) {
+            indiceCancion = siguiente ? (indiceCancion + 1) % listaActual.size() : (indiceCancion - 1 + listaActual.size()) % listaActual.size();
+            mostrarInformacionCancion();
+        } else {
+            System.out.println("No hay canciones disponibles.");
+        }
+    }
+
+    @Override
+    public void mostrarInformacionCancion() {
+        if (!listaActual.isEmpty()) {
+            Cancion cancionActual = listaActual.get(indiceCancion);
+            System.out.println("Reproduciendo: " + cancionActual);
+        }
+    }
+
+    @Override
+    public void conectarDesconectarTelefono() {
+        if (encendido) {
+            telefonoConectado = telefonoConectado == null ? "Teléfono genérico" : null;
+            System.out.println(telefonoConectado == null ? "Teléfono desconectado." : "Teléfono conectado.");
+        }
+    }
+
+    @Override
+    public void mostrarContactos() {
+        if (encendido) {
+            System.out.println("Contactos disponibles: " + contactos);
+        }
+    }
+
+    @Override
+    public void llamarContacto(String contacto) {
+        if (encendido && contactos.contains(contacto)) {
+            ultimoContactoLlamado = contacto;
+            llamadaActiva = true;
+            System.out.println("Llamando a: " + contacto);
+        }
+    }
+
+    @Override
+    public void finalizarLlamada() {
+        if (encendido) {
+            if (llamadaActiva) {
+                llamadaActiva = false;
+                System.out.println("Llamada finalizada.");
+            } else {
+                System.out.println("No hay llamadas activas.");
+            }
+        }
+    }
+
+    @Override
+    public void llamarUltimoContacto() {
+        if (encendido && !ultimoContactoLlamado.isEmpty()) {
+            llamadaActiva = true;
+            System.out.println("Llamando al último contacto: " + ultimoContactoLlamado);
+        }
+    }
 
 }
