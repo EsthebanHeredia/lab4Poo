@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * La clase RadioB implementa la interfaz InterfazRadioB y proporciona
+ * funcionalidades para manejar una radio con ajustes de volumen, cambio de emisoras,
+ * reproducción de música y control de llamadas telefónicas.
+ */
 public class RadioB implements InterfazRadioB {
     private boolean encendido;
     private int volumen;
@@ -15,6 +20,9 @@ public class RadioB implements InterfazRadioB {
     private String ultimoContactoLlamado;
     private boolean llamadaActiva;
 
+    /**
+     * Constructor para inicializar la radio con valores predeterminados.
+     */
     public RadioB() {
         this.encendido = false;
         this.volumen = 5;
@@ -30,6 +38,9 @@ public class RadioB implements InterfazRadioB {
         cargarListasReproduccion();
     }
 
+  /**
+     * Carga las listas de reproducción desde un archivo CSV.
+     */
     private void cargarListasReproduccion() {
         try (BufferedReader br = new BufferedReader(new FileReader("listas_reproduccion.csv"))) {
             String linea;
@@ -46,6 +57,9 @@ public class RadioB implements InterfazRadioB {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void encenderApagar() {
         encendido = !encendido;
