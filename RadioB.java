@@ -92,7 +92,7 @@ public class RadioB implements InterfazRadioB {
         }
     }
 
-        @Override
+    @Override
     public void cargarEmisora(int posicion) {
         if (encendido && posicion >= 0 && posicion < emisorasGuardadas.size()) {
             emisoraActual = emisorasGuardadas.get(posicion);
@@ -174,5 +174,4 @@ public class RadioB implements InterfazRadioB {
             System.out.println("Llamando al último contacto: " + ultimoContactoLlamado);
         }
     }
-
 }
